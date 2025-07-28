@@ -1,0 +1,30 @@
+{
+  "currentScore": 742,
+  "scoreHistory": [
+    {"score": 610, "month": "Jan"},
+    {"score": 600, "month": "Feb"},
+    {"score": 625, "month": "Mar"},
+    {"score": 650, "month": "Apr"},
+    {"score": 625, "month": "May"},
+    {"score": 675, "month": "Jun"},
+    {"score": 650, "month": "Jul"},
+    {"score": 655, "month": "Aug"},
+    {"score": 650, "month": "Sep"},
+    {"score": 675, "month": "Oct"},
+    {"score": 700, "month": "Nov"},
+    {"score": 680, "month": "Dec"}
+  ],
+  "creditFactors": [
+    {"title": "Utilization", "status": "Good"},
+    {"title": "Payment History", "status": "Excellent"}
+  ],
+  "details": {
+    "reportDate": "2025-07-01",
+    "openAccounts": 6
+  },
+  "totalBalance": 8390.00,
+  "openCreditCards": [
+    {"name": "Amazon Card", "balance": 1500.00, "limit": 3000.00},
+    {"name": "Chase Freedom", "balance": 200.00, "limit": 2000.00}
+  ]
+}
