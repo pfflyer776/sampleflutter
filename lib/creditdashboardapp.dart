@@ -20,6 +20,7 @@ class CreditDashboardApp extends StatelessWidget {
   }
 }
 
+// this route is a work around since auto router doesn't let you pass a value for initial widget
 @RoutePage()
 class MyNavigatorPage extends StatefulWidget {
 
