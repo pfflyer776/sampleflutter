@@ -6,6 +6,8 @@ import 'package:avatest/models/employment_model.dart';
 import 'package:avatest/providers/employment_provider.dart';
 import 'package:avatest/views/widgets/buildtextfield.dart';
 
+import '../../app_router.dart';
+
 @RoutePage()
 class EmploymentFormPage extends ConsumerWidget {
   @override
@@ -62,7 +64,7 @@ class EmploymentFormState extends State<EmploymentForm> {
 
   void _confirm() {
       // give feedback
-      context.router.pop();
+      context.router.replace(CreditDashboardRoute(shouldShowDialog: true));
   }
 
   Future<void> _pickDate(BuildContext context) async {
@@ -419,8 +421,17 @@ class EmploymentFormState extends State<EmploymentForm> {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     ref.read(employmentVmProvider.notifier).updateEmployment(emp);
+                                    _continue();
+                                  } else {
+                                    // Form is invalid, show a SnackBar with an error message
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Please correct the errors in the form'),
+                                        duration: Duration(seconds: 2), // SnackBar will show for 2 seconds
+                                        backgroundColor: Colors.red, // You can customize the color
+                                      ),
+                                    );
                                   }
-                                  _continue();
                                 },
                                 style: TextButton.styleFrom(
                                   backgroundColor: Color(0xFFD9D5DC),

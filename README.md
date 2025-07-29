@@ -1,22 +1,29 @@
-# avatest
+## Author
+1. Patrick Ferrell
 
-A new Flutter project.
+## Components
+1. Using flutter_riverpod for state management
+2. Using auto_route for navigation
+3. Using fl_chart for charts
+4. Using visibility_detector for visibility detection
+5. Using path_provider for file storage
+6. Using path for file path manipulation
+7. Using intl for localization
+8. Using sembast for database storage
 
-## Getting Started
+## Design
+1. Used MVVM pattern for design
+2. Created folders to make it easy to find components
+3. For employer page, made it so it initially gets data from json file, but once update the fields it will use the database
+4. For employer page, made it so edit and view are on same layout
+5. The json files are stored in assets folder one for mock_credit_profile and one for employment
+6. Made it so you can add more "Credit Factors" and "Open Credit Card Accounts" to the json file and it will render it correctly
+   on the page
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## Font
-- Credit Score - Weight 600, Size 16px, Style Semibold, color: #2A1E39
-- Updated Today - Weight 400, Size 14px, Style Regular, color: #736B7C  w400 = default
-- At Hauss 
-- Experian - Weight 600, Size 12px, color: #A448FF
+## Comments
+1. Tested code on iOS and Android
+2. Could improve the chart so it automatically spans for different credit scores and vertical axis shows correct span of numbers
+3. Could also improve bars on each open card accounts so they cover the correct length for the percentage
+4. Could also make separate file with strings of labels so can easily make project work for different languages
+5. command to generate routes: flutter pub run build_runner build --delete-conflicting-outputs
+6. Just ran out of time to fix #2, #3 and #4

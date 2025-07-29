@@ -44,6 +44,13 @@ Widget buildEditField(String label, String value, Function(String) onChanged) {
             borderSide: BorderSide.none,
           ),
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter a value';
+          }
+          return null;
+        },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: onChanged,
       ),
     ],
