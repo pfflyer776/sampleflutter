@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../models/credit_profile.dart';
+import 'package:avatest/models/credit_profile.dart';
 
 class CreditService {
   Future<CreditProfile> fetchCreditProfile() async {

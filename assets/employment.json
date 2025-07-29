@@ -1,0 +1,12 @@
+{
+  "employmentType": "Full-time",
+  "employer": "Apple Inc",
+  "jobTitle": "Software Engineer",
+  "grossIncome": "150000",
+  "payFrequency": "Bi-weekly",
+  "nextPayday": "2023-09-22",
+  "isDirectDeposit": true,
+  "employerAddress": "Apple One Apple Park Way, Cupertino, CA 95014",
+  "years": 1,
+  "months": 3
+}

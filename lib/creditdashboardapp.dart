@@ -8,7 +8,6 @@ import 'package:avatest/views/credit/opencreditcard/opencreditcard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-
 import 'package:avatest/app_router.dart';
 
 class CreditDashboardApp extends StatelessWidget {
@@ -26,6 +25,16 @@ class CreditDashboardApp extends StatelessWidget {
 class CreditDashboardPage extends ConsumerWidget {
   final Color primaryColor = Color(0xFF4B0082); // Deep purple
   final Color backgroundColor = Color(0xFFFAF8F6);
+
+  double getScore(int currentScore) {
+    double percent = (currentScore/850);
+    return percent;
+  }
+
+  double getCreditPercent(double currentAmount, double limit) {
+    double percent = (currentAmount/limit);
+    return percent;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,89 +62,21 @@ class CreditDashboardPage extends ConsumerWidget {
           child: Column(
             children: [
               Expanded(
-                 child: SingleChildScrollView(
+                 child:
+                 SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                          borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
-                          child: Container(
-                            color: primaryColor,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                              child: CreditScoreCard(currentScore: profile.currentScore, currentScoreLabel: "Good", currentScoreChange: 2, lastUpdated: "Updated Today | Next May 12", creditService: "Experian"),
-                            ),
-                          )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16,0,16,0),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(8,32,0,0),
-                            child: Text(
-                              "Chart",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF2A1E39),
-                                ),
-                              ),
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(16,0,16,0),
-                          child: CreditChartCard(currentScoreChange: 2, lastUpdated: "Updated Today | Next May 12", creditService: "Experian", scoreHistory: profile.scoreHistory)
-                      ),
+                      CreditScoreCard(currentScore: profile.currentScore, currentScoreLabel: profile.currentScoreLabel, currentScoreChange: profile.currentScoreChange, lastUpdated: profile.lastUpdated, creditService: profile.creditService, percent: getScore(profile.currentScore) ),
+                      CreditChartCard(currentScoreChange: profile.currentScoreChange, lastUpdated: profile.lastUpdated, creditService: profile.creditService, scoreHistory: profile.scoreHistory),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16,0,16,0),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(8,32,0,0),
-                          child: Text(
-                            "Credit factors",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF2A1E39),
-                            ),
-                          ),
-                        ),
-                      ),
-                      CreditFactors(),
+                      CreditFactors(creditFactors: profile.creditFactors),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16,0,16,0),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(8,32,0,0),
-                          child: Text(
-                            "Account details",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF2A1E39),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Accountdetails(),
+                      Accountdetails(details: profile.details, percent: getCreditPercent(profile.totalBalance, profile.totalLimit)),
                       SizedBox(height: 20),
-                      TotalBalance(totalBalance: profile.totalBalance, totalLimit: 200900, utilizationPercent: 4, utilizationLabel: "Excellent"),
+                      TotalBalance(totalBalance: profile.totalBalance, totalLimit: profile.totalLimit, utilizationPercent: profile.utilizationPercent, utilizationLabel: profile.utilizationLabel, percent: getCreditPercent(profile.totalBalance, profile.totalLimit)),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16,0,16,0),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(8,32,0,0),
-                          child: Text(
-                            "Open credit card accounts",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF2A1E39),
-                            ),
-                          ),
-                        ),
-                      ),
-                      OpenCreditCard(),
+                      OpenCreditCard(openCreditCards: profile.openCreditCards),
                     ],
                   ),
                 ),

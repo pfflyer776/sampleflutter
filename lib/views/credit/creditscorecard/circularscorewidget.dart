@@ -1,17 +1,18 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class CircularScoreWidget extends StatelessWidget {
-  final int score;
+  final String score;
   final String label;
   final double progress; // from 0.0 to 1.0
+  final bool reverse;
 
   const CircularScoreWidget({
     super.key,
     required this.score,
     required this.label,
     required this.progress,
+    required this.reverse,
   });
 
   @override
@@ -25,7 +26,7 @@ class CircularScoreWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Transform.rotate(
-            angle: pi, // 180 degrees (starts from bottom)
+            angle: reverse ? pi : 0, // 180 degrees (starts from bottom)
             child: SizedBox(
               width: 80,
               height: 80,

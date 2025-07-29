@@ -1,5 +1,9 @@
 {
   "currentScore": 742,
+  "currentScoreLabel": "Good",
+  "currentScoreChange": 2,
+  "lastUpdated": "Updated Today | Next May 12",
+  "creditService": "Experian",
   "scoreHistory": [
     {"score": 610, "month": "Jan"},
     {"score": 600, "month": "Feb"},
@@ -15,16 +19,22 @@
     {"score": 680, "month": "Dec"}
   ],
   "creditFactors": [
-    {"title": "Utilization", "status": "Good"},
-    {"title": "Payment History", "status": "Excellent"}
+    {"title": "Payment History", "value": 100, "status": "HIGH IMPACT"},
+    {"title": "Credit Card Utilization", "value": 4,"status": "LOW IMPACT"},
+    {"title": "Derogitory Marks", "value": 0,"status": "MEDIUM IMPACT"}
   ],
   "details": {
-    "reportDate": "2025-07-01",
-    "openAccounts": 6
+    "balance": 30,
+    "creditLimit": 600,
+    "remainingAmount": 75,
+    "spendLimit": 100
   },
   "totalBalance": 8390.00,
+  "totalLimit": 200900.00,
+  "utilizationPercent": 4,
+  "utilizationLabel": "Excellent",
   "openCreditCards": [
-    {"name": "Amazon Card", "balance": 1500.00, "limit": 3000.00},
-    {"name": "Chase Freedom", "balance": 200.00, "limit": 2000.00}
+    {"name": "Amazon Card", "balance": 1500.00, "limit": 3000.00, "lastReport": "Reported on July 15, 2025"},
+    {"name": "Chase Freedom", "balance": 200.00, "limit": 2000.00, "lastReport": "Reported on July 8, 2025"}
   ]
 }

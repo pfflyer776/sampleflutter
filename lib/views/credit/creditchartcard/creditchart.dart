@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class CreditChart extends StatelessWidget {
+class CreditChart extends StatefulWidget {
   final List<int> creditScores;
 
   const CreditChart({
     super.key,
     required this.creditScores,
   });
+
+  @override
+  CreditChartState createState() => CreditChartState();
+
+}
+
+class CreditChartState extends State<CreditChart>  {
+  bool showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Delay and then trigger animation
+    Future.delayed(Duration(milliseconds: 900), () {
+      setState(() {
+        showChart = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +73,31 @@ class CreditChart extends StatelessWidget {
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
           lineBarsData: [
+            showChart ? LineChartBarData(
+              spots: [
+                for (int i = 0; i < widget.creditScores.length; i++)
+                  FlSpot(i.toDouble(), widget.creditScores[i].toDouble()),
+              ],
+              isCurved: false,
+              barWidth: 2,
+              color: Colors.teal,
+              dotData: FlDotData(
+                show: true,
+                getDotPainter: (spot, _, __, ___) {
+                  return FlDotCirclePainter(
+                    radius: 3,
+                    color: Colors.white,
+                    strokeWidth: 2,
+                    strokeColor: Colors.teal,
+                  );
+                },
+              ),
+              belowBarData: BarAreaData(show: false),
+            )
+                :
             LineChartBarData(
               spots: [
-                for (int i = 0; i < creditScores.length; i++)
-                  FlSpot(i.toDouble(), creditScores[i].toDouble()),
+
               ],
               isCurved: false,
               barWidth: 2,
@@ -77,8 +117,9 @@ class CreditChart extends StatelessWidget {
             ),
           ],
         ),
+        duration: Duration(milliseconds: 800),
+        curve: Curves.linear,
       ),
     );
-
   }
 }

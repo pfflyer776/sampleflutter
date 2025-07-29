@@ -23,14 +23,9 @@ class SpendLimitIndicatorState extends State<SpendLimitIndicator> {
 
   @override
   Widget build(BuildContext context) {
-
     final markerHeight = 8.0;
     final labelWidth = 60.0;
-
-    // Fixed label at 75 px, center aligned by subtracting half label width
     final labelLeft = 75 - labelWidth / 2;
-    // Marker left depends on animated markerPositionPx, center align rect
-    //final markerLeft = 100 - markerWidth / 2;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

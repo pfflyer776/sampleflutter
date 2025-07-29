@@ -1,14 +1,13 @@
-import 'package:avatest/views/credit/accountdetails/spendlimitindicator.dart';
 import 'package:flutter/material.dart';
-
-import '../creditscorecard/circularscorewidget.dart';
-import 'creditutilizationbar.dart';
+import 'package:avatest/views/credit/creditscorecard/circularscorewidget.dart';
+import 'package:avatest/views/credit/totalbalance/creditutilizationbar.dart';
 
 class TotalBalance extends StatelessWidget {
   final double totalBalance;
   final double totalLimit;
   final int utilizationPercent;
   final String utilizationLabel;
+  final double percent;
 
   const TotalBalance({
     super.key,
@@ -16,6 +15,7 @@ class TotalBalance extends StatelessWidget {
     required this.totalLimit,
     required this.utilizationPercent,
     required this.utilizationLabel,
+    required this.percent,
   });
 
   @override
@@ -63,7 +63,7 @@ class TotalBalance extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  CircularScoreWidget(score: utilizationPercent, label: utilizationLabel, progress: 0.7),
+                  CircularScoreWidget(score: "$utilizationPercent%", label: utilizationLabel, progress: percent, reverse: false),
                 ],
               ),
               SizedBox(height: 8),

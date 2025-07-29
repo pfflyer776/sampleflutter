@@ -1,48 +1,68 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import '../widgets/buildtextfield.dart';
-
-void main() => runApp(MaterialApp(home: EmploymentFormPage()));
+import 'package:avatest/models/employment_model.dart';
+import 'package:avatest/providers/employment_provider.dart';
+import 'package:avatest/views/widgets/buildtextfield.dart';
 
 @RoutePage()
-class EmploymentFormPage extends StatefulWidget {
+class EmploymentFormPage extends ConsumerWidget {
   @override
-  _EmploymentFormPageState createState() => _EmploymentFormPageState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncEmp = ref.watch(employmentVmProvider);
+    return asyncEmp.when(
+      loading: () => Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (e, _) => Scaffold(body: Center(child: Text('Errorx: $e'))),
+      data: (emp) => EmploymentForm(emp: emp),
+    );
+  }
 }
 
-class _EmploymentFormPageState extends State<EmploymentFormPage> {
+class EmploymentForm extends StatefulWidget {
+  final Employment emp;
+  const EmploymentForm({super.key, required this.emp});
+  @override
+  EmploymentFormState createState() => EmploymentFormState();
+}
+
+class EmploymentFormState extends State<EmploymentForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime _selectedDate = DateTime(2023, 9, 22);
-
-  // Form fields
-  String employmentType = 'Full-time';
-  String employer = 'Apple Inc';
-  String jobTitle = 'Software engineer';
-  String income = '150000';
-  String payFrequency = 'Bi-weekly';
-  DateTime nextPayday = DateTime(2023, 9, 22);
-  bool isDirectDeposit = true;
-  String employerAddress = 'Apple One Apple Park Way, Cupertino, CA 95014';
-  int yearsWithEmployer = 1;
-  int monthsWithEmployer = 3;
+  late Employment emp;
 
   bool submitted = false;
   bool isEditing = false;
 
+  @override
+  void initState() {
+    super.initState();
+    emp = Employment(
+      employmentType: widget.emp.employmentType,
+      employer: widget.emp.employer,
+      jobTitle: widget.emp.jobTitle,
+      grossIncome: widget.emp.grossIncome,
+      payFrequency: widget.emp.payFrequency,
+      nextPayday: widget.emp.nextPayday,
+      isDirectDeposit: widget.emp.isDirectDeposit,
+      employerAddress: widget.emp.employerAddress,
+      years: widget.emp.years,
+      months: widget.emp.months,
+    );
+  }
+
   void _edit() {
-      setState(() => isEditing = true);
+    setState(() => isEditing = true);
   }
 
   void _continue() {
+
     setState(() => isEditing = false);
   }
 
   void _confirm() {
-    if (_formKey.currentState!.validate()) {
+      // give feedback
       context.router.pop();
-    }
   }
 
   Future<void> _pickDate(BuildContext context) async {
@@ -111,7 +131,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                         ),
                         DropdownButtonFormField<String>(
-                          value: employmentType,
+                          value: emp.employmentType,
                           icon: Icon(Icons.arrow_drop_down),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -129,34 +149,34 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                           items: ['Full-time', 'Part-time', 'Contractor']
                               .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                               .toList(),
-                          onChanged: (val) => setState(() => employmentType = val!),
+                          onChanged: (val) => setState(() => emp.employmentType = val!),
                         ),
                       ],
                     )
-                    : buildTextField("Employment type", employmentType),
+                    : buildTextField("Employment type", emp.employmentType),
 
                     // Employer
                     isEditing ?
-                    buildEditField("Employer", employer, (val) => employer = val)
+                    buildEditField("Employer", emp.employer, (val) => emp.employer = val)
 
                     :
-                    buildTextField("Employer", employer),
+                    buildTextField("Employer", emp.employer),
 
                     // Job Title
                     isEditing ?
-                    buildEditField("Job title", jobTitle, (val) => jobTitle = val)
+                    buildEditField("Job title", emp.jobTitle, (val) => emp.jobTitle = val)
                     :
-                    buildTextField("Job title", jobTitle),
+                    buildTextField("Job title", emp.jobTitle),
 
                     isEditing?
-                    buildEditField("Gross annual income", income, (val) => income = val)
+                    buildEditField("Gross annual income", emp.grossIncome, (val) => emp.grossIncome = val)
                     :
-                    buildTextField("Gross annual income", '\$$income/year'),
+                    buildTextField("Gross annual income", '\$${emp.grossIncome}/year'),
 
                     isEditing ?
-                    buildDropDownField("Pay frequency", payFrequency, ['Weekly', 'Bi-weekly', 'Monthly'], (val) => payFrequency = val!)
+                    buildDropDownField("Pay frequency", emp.payFrequency, ['Weekly', 'Bi-weekly', 'Monthly'], (val) => emp.payFrequency = val!)
                     :
-                    buildTextField("Pay frequency", payFrequency),
+                    buildTextField("Pay frequency", emp.payFrequency),
 
                     isEditing ?
                     Column(
@@ -221,14 +241,14 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                           children: [
                             Radio(
                               value: true,
-                              groupValue: isDirectDeposit,
-                              onChanged: (val) => setState(() => isDirectDeposit = val as bool),
+                              groupValue: emp.isDirectDeposit,
+                              onChanged: (val) => setState(() => emp.isDirectDeposit = val as bool),
                             ),
                             Text('Yes'),
                             Radio(
                               value: false,
-                              groupValue: isDirectDeposit,
-                              onChanged: (val) => setState(() => isDirectDeposit = val as bool),
+                              groupValue: emp.isDirectDeposit,
+                              onChanged: (val) => setState(() => emp.isDirectDeposit = val as bool),
                             ),
                             Text('No'),
                           ],
@@ -236,7 +256,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                       ],
                     )
                     :
-                    buildTextField("Is your pay a direct deposit?", isDirectDeposit ? 'Yes' : 'No'),
+                    buildTextField("Is your pay a direct deposit?", emp.isDirectDeposit ? 'Yes' : 'No'),
 
                     isEditing ?
                     // Employer Address
@@ -253,7 +273,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                         ),
                         TextFormField(
                           maxLines: 2,
-                          initialValue: employerAddress,
+                          initialValue: emp.employerAddress,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -263,12 +283,12 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                               borderSide: BorderSide.none,
                             ),
                           ),
-                          onChanged: (val) => employerAddress = val,
+                          onChanged: (val) => emp.employerAddress = val,
                         ),
                       ],
                     )
                     :
-                    buildTextField("Employer address", employerAddress),
+                    buildTextField("Employer address", emp.employerAddress),
 
                     isEditing ?
                     // Time with employer
@@ -283,7 +303,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                           children: [
                             Expanded(
                               child: DropdownButtonFormField<int>(
-                                value: yearsWithEmployer,
+                                value: emp.years,
                                 icon: Icon(Icons.arrow_drop_down),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -299,13 +319,13 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                                   fillColor: Colors.white,
                                 ),
                                 items: List.generate(11, (i) => DropdownMenuItem(value: i, child: Text('$i year${i == 1 ? '' : 's'}'))),
-                                onChanged: (val) => setState(() => yearsWithEmployer = val!),
+                                onChanged: (val) => setState(() => emp.years = val!),
                               ),
                             ),
                             SizedBox(width: 10),
                             Expanded(
                               child: DropdownButtonFormField<int>(
-                                value: monthsWithEmployer,
+                                value: emp.months,
                                 icon: Icon(Icons.arrow_drop_down),
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -321,7 +341,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                                   fillColor: Colors.white,
                                 ),
                                 items: List.generate(12, (i) => DropdownMenuItem(value: i, child: Text('$i month${i == 1 ? '' : 's'}'))),
-                                onChanged: (val) => setState(() => monthsWithEmployer = val!),
+                                onChanged: (val) => setState(() => emp.months = val!),
                               ),
                             ),
                           ],
@@ -329,7 +349,7 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                       ],
                     )
                     :
-                    buildTextField("Time with employer", '$yearsWithEmployer year${yearsWithEmployer == 1 ? '' : 's'} $monthsWithEmployer month${monthsWithEmployer == 1 ? '' : 's'}'),
+                    buildTextField("Time with employer", '${emp.years} year${emp.years == 1 ? '' : 's'} ${emp.months} month${emp.months == 1 ? '' : 's'}'),
 
                     SizedBox(height: 20),
 
@@ -393,25 +413,36 @@ class _EmploymentFormPageState extends State<EmploymentFormPage> {
                     Column(
                       children: [
                         Center(
-                          child: TextButton(
-                            onPressed: () {
-                              _continue();
-                            },
-                            style: TextButton.styleFrom(
-                              backgroundColor: Color(0xFFD9D5DC), // Soft gray background (adjust as needed)
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20), // Rounded edges
-                              ),
-                              minimumSize: Size(300, 45), // Width and height like the image
-                            ),
-                            child: Text(
-                              'Continue',
-                              style: TextStyle(
-                                color: Color(0xFF5E556C), // Matching text color from image
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                          child: Consumer(
+                            builder: (context, ref, _) {
+                              return TextButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    ref.read(employmentVmProvider.notifier).updateEmployment(emp);
+                                  }
+                                  _continue();
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: Color(0xFFD9D5DC),
+                                  // Soft gray background (adjust as needed)
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20), // Rounded edges
+                                  ),
+                                  minimumSize: Size(300,
+                                      45), // Width and height like the image
+                                ),
+                                child: Text(
+                                  'Continue',
+                                  style: TextStyle(
+                                    color: Color(0xFF5E556C),
+                                    // Matching text color from image
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              );
+                            }
                           ),
                         ),
                         SizedBox(height: 20),
