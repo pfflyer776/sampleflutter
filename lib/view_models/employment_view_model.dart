@@ -7,7 +7,7 @@ class EmploymentViewModel extends AsyncNotifier<Employment> {
 
   @override
   Future<Employment> build() async {
-    _repo = ref.read(employmentRepoProvider);
+    _repo = ref.watch(employmentRepoProvider);
     return _repo.loadFromDb();
   }
 
