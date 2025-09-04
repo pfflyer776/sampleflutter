@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avatest/models/credit_profile.dart';
+import 'package:banktest/models/credit_profile.dart';
 
 class OpenCreditCard extends StatelessWidget {
   final List<CreditCardAccount> openCreditCards;

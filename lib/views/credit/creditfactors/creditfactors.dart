@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avatest/models/credit_profile.dart';
+import 'package:banktest/models/credit_profile.dart';
 
 class CreditFactors extends StatelessWidget {
   final List<CreditFactor> creditFactors;

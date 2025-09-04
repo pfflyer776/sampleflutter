@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:avatest/models/credit_profile.dart';
-import 'package:avatest/services/credit_service.dart';
+import 'package:banktest/models/credit_profile.dart';
+import 'package:banktest/services/credit_service.dart';
 
 class CreditProfileViewModel extends StateNotifier<AsyncValue<CreditProfile>> {
   final CreditService _service;

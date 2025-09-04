@@ -2,8 +2,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:sembast/sembast.dart';
 import 'package:riverpod/riverpod.dart';
 import 'dart:convert';
-import 'package:avatest/models/employment_model.dart';
-import 'package:avatest/services/database_service.dart';
+import 'package:banktest/models/employment_model.dart';
+import 'package:banktest/services/database_service.dart';
 
 final dbProvider = Provider<DatabaseService>((ref) {
   return DatabaseService();

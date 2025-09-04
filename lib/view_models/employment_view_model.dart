@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:avatest/data/employment_repository.dart';
-import 'package:avatest/models/employment_model.dart';
+import 'package:banktest/data/employment_repository.dart';
+import 'package:banktest/models/employment_model.dart';
 
 class EmploymentViewModel extends AsyncNotifier<Employment> {
   late final EmploymentRepository _repo;

@@ -1,6 +1,6 @@
-import 'package:avatest/models/credit_profile.dart';
+import 'package:banktest/models/credit_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:avatest/views/credit/creditchartcard/creditchart.dart';
+import 'package:banktest/views/credit/creditchartcard/creditchart.dart';
 
 class CreditChartCard extends StatelessWidget {
   final int currentScoreChange;

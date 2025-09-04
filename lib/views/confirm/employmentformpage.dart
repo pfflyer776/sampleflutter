@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:avatest/models/employment_model.dart';
-import 'package:avatest/providers/employment_provider.dart';
-import 'package:avatest/views/widgets/buildtextfield.dart';
+import 'package:banktest/models/employment_model.dart';
+import 'package:banktest/providers/employment_provider.dart';
+import 'package:banktest/views/widgets/buildtextfield.dart';
 
 import '../../app_router.dart';
 

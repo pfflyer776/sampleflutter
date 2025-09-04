@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:avatest/views/credit/creditscorecard/circularscorewidget.dart';
-import 'package:avatest/views/credit/totalbalance/creditutilizationbar.dart';
+import 'package:banktest/views/credit/creditscorecard/circularscorewidget.dart';
+import 'package:banktest/views/credit/totalbalance/creditutilizationbar.dart';
 
 class TotalBalance extends StatelessWidget {
   final double totalBalance;

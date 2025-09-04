@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avatest/views/credit/creditscorecard/circularscorewidget.dart';
+import 'package:banktest/views/credit/creditscorecard/circularscorewidget.dart';
 
 class CreditScoreCard extends StatelessWidget {
   final int currentScore;

@@ -1,6 +1,6 @@
-import 'package:avatest/views/credit/accountdetails/spendlimitindicator.dart';
+import 'package:banktest/views/credit/accountdetails/spendlimitindicator.dart';
 import 'package:flutter/material.dart';
-import 'package:avatest/models/credit_profile.dart';
+import 'package:banktest/models/credit_profile.dart';
 
 class Accountdetails extends StatelessWidget {
   final CreditDetails details;

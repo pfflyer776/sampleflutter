@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:avatest/creditdashboardapp.dart';
-import 'package:avatest/views/confirm/employmentformpage.dart';
+import 'package:banktest/creditdashboardapp.dart';
+import 'package:banktest/views/confirm/employmentformpage.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')

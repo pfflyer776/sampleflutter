@@ -1,14 +1,14 @@
-import 'package:avatest/providers/credit_providers.dart';
-import 'package:avatest/views/credit/accountdetails/accountdetails.dart';
-import 'package:avatest/views/credit/creditchartcard/creditchartcard.dart';
-import 'package:avatest/views/credit/creditfactors/creditfactors.dart';
-import 'package:avatest/views/credit/creditscorecard/creditscorecard.dart';
-import 'package:avatest/views/credit/totalbalance/totalbalance.dart';
-import 'package:avatest/views/credit/opencreditcard/opencreditcard.dart';
+import 'package:banktest/providers/credit_providers.dart';
+import 'package:banktest/views/credit/accountdetails/accountdetails.dart';
+import 'package:banktest/views/credit/creditchartcard/creditchartcard.dart';
+import 'package:banktest/views/credit/creditfactors/creditfactors.dart';
+import 'package:banktest/views/credit/creditscorecard/creditscorecard.dart';
+import 'package:banktest/views/credit/totalbalance/totalbalance.dart';
+import 'package:banktest/views/credit/opencreditcard/opencreditcard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:avatest/app_router.dart';
+import 'package:banktest/app_router.dart';
 
 class CreditDashboardApp extends StatelessWidget {
 
@@ -105,7 +105,7 @@ class CreditDashboardPage extends ConsumerWidget {
                   onPressed: () {
                     // Handle feedback submission here
                     final feedback = feedbackController.text;
-                    print('Feedback: $feedback');
+                    //print('Feedback: $feedback');
                     Navigator.of(context).pop(); // Close the dialog
                   },
                   style: ElevatedButton.styleFrom(
