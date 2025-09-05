@@ -22,9 +22,9 @@
 
 ## Comments
 1. Tested code on iOS and Android
-2. Could improve the chart so it automatically spans for different credit scores and vertical axis shows correct span of numbers
-3. Could also improve bars on each open card accounts so they cover the correct length for the percentage
-4. Could also make separate file with strings of labels so can easily make project work for different language
-5. doesn't work on web since I'm using path_provider for file storage, need to make different storage for the web
-6. command to generate routes: flutter pub run build_runner build --delete-conflicting-outputs
-7. Just ran out of time to fix #2, #3, #4 and #5
+2. command to generate routes: flutter pub run build_runner build --delete-conflicting-outputs
+
+## TO DO
+1. Improve chart so automatically spans for different credit scores and vertical axis shows correct span of numbers
+2. Improve bars on each open card accounts so they cover the correct length for the percentage
+3. Work on web since using path_provider for file storage.  New different storage for the web
